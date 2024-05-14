@@ -1,0 +1,31 @@
+# Ignorar directorios y archivos específicos
+
+# Ignorar la carpeta node_modules donde se almacenan las dependencias de npm
+node_modules/
+
+# Ignorar los archivos de configuración de entorno
+.env
+
+# Ignorar los archivos de registro generados
+logs/
+*.log
+
+# Ignorar los archivos de compilación
+/build
+
+# Archivos de configuracion 
+package-lock.json
+
+
+
+# Ignorar archivos de respaldo
+*.bak
+*.backup
+*.swp
+
+# Ignorar la carpeta de caché
+.cache/
+
+# Ignorar archivos de configuración específicos del sistema
+.DS_Store
+
