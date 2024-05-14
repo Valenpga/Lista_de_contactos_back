@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ContacSchema = new mongoose.Schema(
+const ContactSchema = new mongoose.Schema(
     {
         fullName: {
             type: String,
@@ -15,9 +15,9 @@ const ContacSchema = new mongoose.Schema(
             required: true
         }
 
-    }
+    }, {timestamps: true}
 )
 
-const ContactModel = mongoose.ContacSchema('ContactModel', ContacSchema)
+const ContactModels = mongoose.model('ContactModels', ContactSchema)
 
-module.exports = ContactModel
+module.exports = ContactModels
