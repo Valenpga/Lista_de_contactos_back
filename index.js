@@ -5,7 +5,8 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const contactRoutes = require('./routes/contactRoutes');
 
-app.use('/',contactRoutes)
+app.use('/', express.json());
+app.use('/', contactRoutes);
 
 
 dbConnection()

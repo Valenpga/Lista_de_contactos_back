@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const contactModels = require('../models/contactModels')
+const ContactModels = require('../models/ContactModels')
+const contactControllers = require('../controllers/contactControllers')
 
-router.get('/', (req, res) => (res.send('estamos dentro de las rutas')));
+router.post('/create', contactControllers.createContact);
+router.get('/', contactControllers.getAllContacts);
 
-module.exports = router
+
+module.exports = router;
