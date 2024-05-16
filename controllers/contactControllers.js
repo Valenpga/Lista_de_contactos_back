@@ -12,6 +12,7 @@ const createContact = async (req, res) => {
 
     }catch(error){
         console.log(error)
+        res.status(500).json({error:"Contacto no creado"})
     }
     
 }
@@ -21,13 +22,14 @@ const getAllContacts = async (req, res) => {
         res.json(contacts)
     }catch(error){
         console.log(error)
+        res.status(500).json({error:"No se han conseguido los contactos"})
     }
 }
 const getContactById = async (req, res) => {
     const {id} = req.params;
 
     try{
-        const contact = await ContactModels.find(id)
+        const contact = await ContactModels.findById(id)
         if(!contact){
             return res.status(404).json({error:'Contacto no encontrado'})
         }
@@ -35,19 +37,36 @@ const getContactById = async (req, res) => {
 
     }catch(error){
         console.log(error)
+        res.status(500).json({error:"No se encuentra el contacto"})
     }
 }
-const updateContactsById = async (req, res) => {
+const updateContactById = async (req, res) => {
     const {id} = req.params;
     const {fullName, phoneNumber, email} = req.body
     try{
     const updateContact = await ContactModels.findByIdAndUpdate(id, {fullName, phoneNumber, email}, {new: true});
-    if(!updateContact){
-        return res.status(404).json({error:"No se encuentra el contacto"})
-    }
+    if (updateContact) {
+        res.status(200).json({updateContact})
+      } else {
+        res.status(500).json({mensaje:"Error de validacion"})
+      }
+    
     }catch(error){
         console.error(error);
         res.status(500).json({error:"Error al actualiar"})
+    }
+}
+const deleteContactById = async (req,res) => {
+    const {id} = req.params
+    try{
+        const deleteContact = await ContactModels.findByIdAndDelete(id)
+        if(!deleteContact) {
+            return res.status(500).json({Error:"Contacto no encontrado"})
+        }
+        res.status(200).json({mensaje:"contacto eliminado correctamente"}) 
+    }catch(error){
+        console.error(error)
+        res.status(500).json({error:"No se elimino el contacto"})
     }
 }
 
@@ -56,5 +75,6 @@ module.exports = {
     createContact,
     getAllContacts,
     getContactById,
-    updateContactsById
+    updateContactById,
+    deleteContactById
 }
