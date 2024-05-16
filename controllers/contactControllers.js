@@ -23,8 +23,38 @@ const getAllContacts = async (req, res) => {
         console.log(error)
     }
 }
+const getContactById = async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        const contact = await ContactModels.find(id)
+        if(!contact){
+            return res.status(404).json({error:'Contacto no encontrado'})
+        }
+        res.status(200).json(contact)
+
+    }catch(error){
+        console.log(error)
+    }
+}
+const updateContactsById = async (req, res) => {
+    const {id} = req.params;
+    const {fullName, phoneNumber, email} = req.body
+    try{
+    const updateContact = await ContactModels.findByIdAndUpdate(id, {fullName, phoneNumber, email}, {new: true});
+    if(!updateContact){
+        return res.status(404).json({error:"No se encuentra el contacto"})
+    }
+    }catch(error){
+        console.error(error);
+        res.status(500).json({error:"Error al actualiar"})
+    }
+}
+
 
 module.exports = {
     createContact,
-    getAllContacts
+    getAllContacts,
+    getContactById,
+    updateContactsById
 }
