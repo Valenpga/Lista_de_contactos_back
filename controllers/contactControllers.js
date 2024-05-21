@@ -1,5 +1,10 @@
 const ContactModels = require('../models/ContactModels')
 
+const getMessage = (req, res) => {
+    res.json({ message: '¡Hola desde el backend!' });
+  
+  
+};
 const createContact = async (req, res) => {
     const contact = new ContactModels({
         fullName: req.body.fullName,
@@ -15,7 +20,7 @@ const createContact = async (req, res) => {
         res.status(500).json({error:"Contacto no creado"})
     }
     
-}
+};
 const getAllContacts = async (req, res) => {
     try{
         const contacts = await ContactModels.find()
@@ -24,7 +29,7 @@ const getAllContacts = async (req, res) => {
         console.log(error)
         res.status(500).json({error:"No se han conseguido los contactos"})
     }
-}
+};
 const getContactById = async (req, res) => {
     const {id} = req.params;
 
@@ -39,7 +44,7 @@ const getContactById = async (req, res) => {
         console.log(error)
         res.status(500).json({error:"No se encuentra el contacto"})
     }
-}
+};
 const updateContactById = async (req, res) => {
     const {id} = req.params;
     const {fullName, phoneNumber, email} = req.body
@@ -55,7 +60,7 @@ const updateContactById = async (req, res) => {
         console.error(error);
         res.status(500).json({error:"Error al actualiar"})
     }
-}
+};
 const deleteContactById = async (req,res) => {
     const {id} = req.params
     try{
@@ -68,7 +73,7 @@ const deleteContactById = async (req,res) => {
         console.error(error)
         res.status(500).json({error:"No se elimino el contacto"})
     }
-}
+};
 
 
 module.exports = {
@@ -76,5 +81,6 @@ module.exports = {
     getAllContacts,
     getContactById,
     updateContactById,
-    deleteContactById
+    deleteContactById,
+    getMessage
 }
