@@ -16,13 +16,8 @@ const appLogger = function (req, res, next) {
   app.use(appLogger)
 
 app.use('/', express.json());
-//app.use('/', contactRoutes);
 app.use(cors());
 app.use('/api', contactRoutes);
-
-app.get('/api/message', (req, res) => {
-  res.json({message:'Hola desde el backend'})
-})
 
 
 

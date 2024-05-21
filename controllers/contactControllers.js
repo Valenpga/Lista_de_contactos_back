@@ -1,10 +1,6 @@
 const ContactModels = require('../models/ContactModels')
 
-const getMessage = (req, res) => {
-    res.json({ message: '¡Hola desde el backend!' });
-  
-  
-};
+
 const createContact = async (req, res) => {
     const contact = new ContactModels({
         fullName: req.body.fullName,
@@ -82,5 +78,5 @@ module.exports = {
     getContactById,
     updateContactById,
     deleteContactById,
-    getMessage
+    
 }
