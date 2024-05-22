@@ -17,7 +17,7 @@ const appLogger = function (req, res, next) {
 
 app.use('/', express.json());
 app.use(cors());
-app.use('/api', contactRoutes);
+app.use('/', contactRoutes);
 
 
 
